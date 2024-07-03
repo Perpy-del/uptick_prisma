@@ -24,4 +24,5 @@ async function register(userData: User) {
   return newUser;
 }
 
+
 export { register };
