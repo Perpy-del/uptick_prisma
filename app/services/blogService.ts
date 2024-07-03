@@ -2,6 +2,7 @@ import prisma from '../../prisma';
 import { AuthenticationError } from '../errors/AuthenticationError';
 import { NotFoundError } from '../errors/NotFoundError';
 import { Blog } from '../interfaces/BlogInterface';
+import { sluggify } from '../utilities/sluggify';
 
 async function show(identifier: string): Promise<Array<Blog>> {
   const existingAuthor = await prisma.user.findUnique({
@@ -36,6 +37,34 @@ async function showOne(
   });
 
   return existingBlog;
+}
+
+async function createBlog(identifier: string, blogData: Blog) {
+  const existingAuthor = await prisma.user.findUnique({
+    where: { id: identifier },
+  });
+
+  if (!existingAuthor) {
+    throw new AuthenticationError('User not allowed to perform this operation');
+  }
+
+  const newBlogPost = await prisma.blog.create({
+    data: {
+      title: blogData.title,
+      slug: sluggify(blogData.title),
+      body: blogData.body,
+      isFeatured: blogData.isFeatured,
+      category: blogData.category,
+      thumbnail: blogData.thumbnail,
+      author: {
+        connect: {
+          id: identifier,
+        },
+      },
+    },
+  });
+
+  return newBlogPost;
 }
 
 async function update(identifier: string, blogId: string, blogData: Blog) {
@@ -101,4 +130,4 @@ async function deleteAllBlog(identifier: string) {
   return deletedBlogs;
 }
 
-export { show, showOne, update, deleteBlog, deleteAllBlog };
+export { show, showOne, createBlog, update, deleteBlog, deleteAllBlog };

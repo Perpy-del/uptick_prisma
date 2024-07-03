@@ -1,6 +1,6 @@
-function sluggify(text: string): string | null {
+function sluggify(text: string): string {
     if (!text) {
-        return null
+        return ""
     };
   
     return text
