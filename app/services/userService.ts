@@ -61,7 +61,7 @@ async function login(userData: User) {
 
   const { token, expiryTime } = generateToken(tokenData);
 
-  const { id, email, firstName, lastName, createdAt, updatedAt, blogs } =
+  const { id, email, firstName, lastName, createdAt, updatedAt } =
     existingUser;
 
   const data = {
@@ -71,7 +71,6 @@ async function login(userData: User) {
     lastName: lastName,
     createdAt: createdAt,
     updatedAt: updatedAt,
-    blogs: blogs,
     token: token,
     tokenExpiresAt: expiryTime,
   };

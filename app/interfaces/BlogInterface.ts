@@ -6,7 +6,8 @@ export interface Blog {
     body: string;
     isFeatured: boolean;
     category: string;
+    thumbnail?: string;
     createdAt?: Date;
     updatedAt?: Date;
-    authorId: string 
+    authorId?: string 
   }
