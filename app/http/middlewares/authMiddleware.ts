@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 interface TokenPayloadInterface {
   email: string;
-  id: string;
+  id: string | undefined;
 }
 
 function generateToken(data: TokenPayloadInterface) {
@@ -12,6 +12,8 @@ function generateToken(data: TokenPayloadInterface) {
     new Date(),
     Number(process.env.JWT_EXPIRY_TIME)
   );
+
+  const date = new Date();
 
   const payload = {
     exp: Math.floor(getTime(expiryTime) / 1000),
