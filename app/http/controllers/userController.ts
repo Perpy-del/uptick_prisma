@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { register } from "../../services/userService.js";
-import { User } from "../../services/userService.js";
+import { User } from '../../interfaces/UserInterface.js';
 
 async function createNewUser(req: Request, res: Response) {
   try {
@@ -12,9 +12,9 @@ async function createNewUser(req: Request, res: Response) {
     const result = await register(userData)
 
     res.json({ data: result });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error querying database:', error);
-    res.status(500).json({ error: 'Failed to create new user' });
+    res.status(error.statusCode || 500).json({ data: { error: `${error.message}`} });
   }
 }
 

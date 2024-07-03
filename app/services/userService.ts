@@ -1,25 +1,27 @@
 import prisma from '../../prisma/index.js';
-
-export interface User {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-}
+import { BadUserRequestError } from '../errors/BadUserRequestError.js';
+import { hashPassword, compareHash } from '../utilities/hash.js';
+import { User } from '../interfaces/UserInterface.js';
 
 async function register(userData: User) {
-  const newUser = await prisma.user.create({
+  const existingUser: User | null = await prisma.user.findUnique({ where: { email: userData.email} });
+
+  if (existingUser) {
+    throw new BadUserRequestError("User already exists. Log in")
+  }
+
+  const passwordHash: string = await hashPassword(userData.password)
+
+  const newUser: User = await prisma.user.create({
     data: {
       email: userData.email,
       firstName: userData.firstName,
       lastName: userData.lastName,
-      password: userData.password,
+      password: passwordHash,
     },
   });
 
   return newUser;
 }
-
-
 
 export { register };
