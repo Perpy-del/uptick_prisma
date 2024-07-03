@@ -47,10 +47,10 @@ async function update(identifier: string, blogId: string, blogData: Blog) {
     throw new AuthenticationError('User not allowed to perform this operation');
   }
 
-  const existingBlog = await prisma.blog.findFirst({ where: { id: blogId }})
+  const existingBlog = await prisma.blog.findFirst({ where: { id: blogId } });
 
-  if(!existingBlog) {
-    throw new NotFoundError("Blog post does not exist");
+  if (!existingBlog) {
+    throw new NotFoundError('Blog post does not exist');
   }
 
   const updatedBlog: Blog = await prisma.blog.update({
@@ -72,10 +72,10 @@ async function deleteBlog(identifier: string, blogId: string) {
     throw new AuthenticationError('User not allowed to perform this operation');
   }
 
-  const existingBlog = await prisma.blog.findFirst({ where: { id: blogId }})
+  const existingBlog = await prisma.blog.findFirst({ where: { id: blogId } });
 
-  if(!existingBlog) {
-    throw new NotFoundError("Blog post does not exist");
+  if (!existingBlog) {
+    throw new NotFoundError('Blog post does not exist');
   }
 
   const deletedBlog: Blog = await prisma.blog.delete({
