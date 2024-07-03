@@ -13,8 +13,6 @@ function generateToken(data: TokenPayloadInterface) {
     Number(process.env.JWT_EXPIRY_TIME)
   );
 
-  const date = new Date();
-
   const payload = {
     exp: Math.floor(getTime(expiryTime) / 1000),
     email: data.email,

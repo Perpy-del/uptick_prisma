@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { login, register } from '../../services/userService.js';
+import { login, register, update } from '../../services/userService.js';
 import { User } from '../../interfaces/UserInterface.js';
 
 async function createNewUser(req: Request, res: Response) {
@@ -33,4 +33,17 @@ async function loginUser(req: Request, res: Response) {
   }
 }
 
-export { createNewUser, loginUser };
+async function updateUser(req: Request, res: Response) {
+  try {
+    const result = await update(req.body, req.params.id)
+
+    res.json({ data: result });
+  } catch (error: any) {
+    console.error('Error querying database:', error);
+    res
+      .status(error.statusCode || 500)
+      .json({ data: { error: `${error.message}` } });
+  }
+}
+
+export { createNewUser, loginUser, updateUser };

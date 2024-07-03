@@ -30,8 +30,8 @@ async function register(userData: User) {
     firstName: newUser.firstName,
     lastName: newUser.lastName,
     createdAt: newUser.createdAt,
-    updatedAt: newUser.updatedAt
-  }
+    updatedAt: newUser.updatedAt,
+  };
 
   return data;
 }
@@ -45,7 +45,10 @@ async function login(userData: User) {
     throw new BadUserRequestError('User credentials are not in our records');
   }
 
-  const isPasswordCorrect: boolean = await compareHash(userData.password, existingUser.password);
+  const isPasswordCorrect: boolean = await compareHash(
+    userData.password,
+    existingUser.password
+  );
 
   if (!isPasswordCorrect) {
     throw new BadUserRequestError('User credentials are not in our records');
@@ -53,12 +56,13 @@ async function login(userData: User) {
 
   const tokenData = {
     email: existingUser.email,
-    id: existingUser.id
-  }
+    id: existingUser.id,
+  };
 
-  const { token, expiryTime } = generateToken(tokenData)
+  const { token, expiryTime } = generateToken(tokenData);
 
-  const { id, email, firstName, lastName, createdAt, updatedAt, blogs } = existingUser;
+  const { id, email, firstName, lastName, createdAt, updatedAt, blogs } =
+    existingUser;
 
   const data = {
     userId: id,
@@ -69,10 +73,27 @@ async function login(userData: User) {
     updatedAt: updatedAt,
     blogs: blogs,
     token: token,
-    tokenExpiresAt: expiryTime
-  }
+    tokenExpiresAt: expiryTime,
+  };
 
   return data;
 }
 
-export { register, login };
+async function update(userData: any, identifier: string) {
+  const existingUser = await prisma.user.findUnique({ where: { id: identifier }})
+
+  if (!existingUser) {
+    throw new BadUserRequestError("User not found")
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: { id: identifier },
+    data: {
+      ...userData,
+    },
+  });
+
+  return updatedUser;
+}
+
+export { register, login, update };
