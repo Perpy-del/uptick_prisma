@@ -14,14 +14,14 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(uuid())
-  email           String   @unique
-  firstName       String
-  lastName        String
-  password        String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  blogs           Blog[]
+  id        String   @id @default(uuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  blogs     Blog[]
 }
 
 model Blog {
@@ -31,7 +31,7 @@ model Blog {
   author     User     @relation(fields: [authorId], references: [id])
   body       String
   isFeatured Boolean  @default(false)
-  category   String?
+  category   String?  @default("Uncategorized")
   thumbnail  String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
