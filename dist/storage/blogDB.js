@@ -1,0 +1,111 @@
+export const data = [
+    {
+        id: '5cc2ffb9-cd12-4693-bcf7-6bdb3e299ae7',
+        title: 'Et Magnis Dis Parturient Montes Nascetur Ridiculus Mus',
+        slug: 'et-magnis-dis-parturient-montes-nascetur-ridiculus-mus',
+        body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis.',
+        isFeatured: false,
+        category: 'Basic Industries',
+        thumbnail: 'http://dummyimage.com/222x194.png/cc0000/ffffff',
+        createdAt: "2024-07-03T00:04:21.829Z",
+        updatedAt: "2024-07-03T00:04:21.829Z",
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: '8f777caf-fbe9-4185-8a12-f266b1769898',
+        title: 'Neque Aenean Auctor Gravida Sem Praesent Id Massa',
+        slug: 'neque-aenean-auctor-gravida-sem-praesent-id-massa',
+        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis.',
+        isFeatured: false,
+        category: 'Consumer Services',
+        thumbnail: 'http://dummyimage.com/127x178.png/ff4444/ffffff',
+        createdAt: '2024-07-03T00:04:21.829Z',
+        updatedAt: '2024-07-03T00:04:21.829Z',
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: 'e18fdc07-246c-4e95-bae1-5b592e51e721',
+        title: 'In Hac Habitasse Platea Dictumst Etiam',
+        slug: 'in-hac-habitasse-platea-dictumst-etiam',
+        body: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien.',
+        isFeatured: true,
+        category: 'Consumer Services',
+        thumbnail: 'http://dummyimage.com/234x106.png/cc0000/ffffff',
+        createdAt: "2024-07-03T01:17:41.860Z",
+        updatedAt: "2024-07-03T01:17:41.860Z",
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: 'a7b44877-e0a7-4831-be07-662d7eaea755',
+        title: 'Interdum In Ante Vestibulum Ante Ipsum Primis',
+        slug: 'interdum-in-ante-vestibulum-ante-ipsum-primis',
+        body: 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper.',
+        isFeatured: true,
+        category: 'Consumer Services',
+        thumbnail: 'http://dummyimage.com/173x140.png/ff4444/ffffff',
+        createdAt: "2024-07-03T01:17:41.860Z",
+        updatedAt: "2024-07-03T01:17:41.860Z",
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: 'a1c7b469-d2da-4d7e-aa3b-04f94ee0216a',
+        title: 'Hendrerit At Vulputate Vitae Nisl',
+        slug: 'hendrerit-at-vulputate-vitae-nisl',
+        body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis.',
+        isFeatured: false,
+        category: 'Technology',
+        thumbnail: 'http://dummyimage.com/191x144.png/dddddd/000000',
+        createdAt: '2024-07-03T00:04:21.829Z',
+        updatedAt: '2024-07-03T00:04:21.829Z',
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: '9cc64291-dc11-4de6-bf45-893ff154cf1c',
+        title: 'Nascetur Ridiculus Mus Vivamus Vestibulum Sagittis Sapien',
+        slug: 'nascetur-ridiculus-mus-vivamus-vestibulum-sagittis-sapien',
+        body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis.',
+        isFeatured: false,
+        category: 'Health Care',
+        thumbnail: 'http://dummyimage.com/169x220.png/dddddd/000000',
+        createdAt: "2024-07-03T01:17:41.860Z",
+        updatedAt: "2024-07-03T01:17:41.860Z",
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: 'b1428777-80a3-423c-b3cc-f388513b3f3f',
+        title: 'Hac Habitasse Platea Dictumst Morbi Vestibulum Velit',
+        slug: 'hac-habitasse-platea-dictumst-morbi-vestibulum-velit',
+        body: 'Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.',
+        isFeatured: true,
+        category: 'Basic Industries',
+        thumbnail: 'http://dummyimage.com/105x210.png/5fa2dd/ffffff',
+        createdAt: '2024-07-03T00:04:21.829Z',
+        updatedAt: '2024-07-03T00:04:21.829Z',
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: 'dfebb50f-8276-4466-8a93-db07394dce05',
+        title: 'Magna At Nunc Commodo Placerat Praesent',
+        slug: 'magna-at-nunc-commodo-placerat-praesent',
+        body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis..',
+        isFeatured: false,
+        category: 'Health Care',
+        thumbnail: 'http://dummyimage.com/141x127.png/dddddd/000000',
+        createdAt: "2024-07-03T01:17:41.860Z",
+        updatedAt: "2024-07-03T01:17:41.860Z",
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+    {
+        id: '5e630d35-fae7-45f7-a88a-747cbc827bdb',
+        title: 'Dictumst Maecenas Ut Massa Quis Augue Luctus Tincidunt',
+        slug: 'dictumst-maecenas-ut-massa-quis-augue-luctus-tincidunt',
+        body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis.',
+        isFeatured: false,
+        category: 'Health Care',
+        thumbnail: 'http://dummyimage.com/206x110.png/dddddd/000000',
+        createdAt: '2024-07-03T00:04:21.829Z',
+        updatedAt: '2024-07-03T00:04:21.829Z',
+        authorId: 'db97ddc3-f66e-4eb7-9888-65e830ec5eef'
+    },
+];
+//# sourceMappingURL=blogDB.js.map

@@ -7,7 +7,7 @@
     "start": "nodemon",
     "build": "tsc",
     "postinstall": "npm run build",
-    "start:prod": "node server.js"
+    "start:prod": "node dist/server.js"
   },
   "prisma": {
     "seed": "node --loader ts-node/esm prisma/seed.ts"
