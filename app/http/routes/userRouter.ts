@@ -8,6 +8,6 @@ const router = express.Router();
 /* GET users listing. */
 router.post('/api/create-user', registerValidator, createNewUser);
 router.post('/api/login', loginValidator, loginUser);
-router.post('/api/user/:id', authenticateUser, updateUser);
+router.put('/api/user/:id', authenticateUser, updateUser);
 
 export {router};

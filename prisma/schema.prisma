@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("PROD_DATABASE_URL")
 }
 
 model User {
@@ -27,7 +27,7 @@ model User {
 model Blog {
   id         String   @id @default(uuid())
   title      String
-  slug       String
+  slug       String   @unique
   author     User     @relation(fields: [authorId], references: [id])
   body       String
   isFeatured Boolean  @default(false)

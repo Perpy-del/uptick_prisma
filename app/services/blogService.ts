@@ -1,29 +1,18 @@
-import prisma from '../../prisma';
-import { AuthenticationError } from '../errors/AuthenticationError';
-import { NotFoundError } from '../errors/NotFoundError';
-import { Blog } from '../interfaces/BlogInterface';
-import { sluggify } from '../utilities/sluggify';
+import prisma from '../../prisma/index.js';
+import { AuthenticationError } from '../errors/AuthenticationError.js';
+import { NotFoundError } from '../errors/NotFoundError.js';
+import { Blog } from '../interfaces/BlogInterface.js';
+import { sluggify } from '../utilities/sluggify.js';
 
 async function show(identifier: string): Promise<Array<Blog>> {
-  const existingAuthor = await prisma.user.findUnique({
-    where: { id: identifier },
-  });
-
-  if (!existingAuthor) {
-    throw new AuthenticationError('User not allowed to perform this operation');
-  }
-
   const blogs: Array<Blog> = await prisma.blog.findMany({
-    where: { id: identifier },
+    where: { authorId: identifier },
   });
 
   return blogs;
 }
 
-async function showOne(
-  identifier: string,
-  blogId: string
-): Promise<Blog | null> {
+async function showOne(identifier: string, blogId: string) {
   const existingAuthor = await prisma.user.findUnique({
     where: { id: identifier },
   });
@@ -32,16 +21,18 @@ async function showOne(
     throw new AuthenticationError('User not allowed to perform this operation');
   }
 
-  const existingBlog = await prisma.blog.findUnique({
-    where: { authorId: identifier, id: blogId },
-  });
+  const existingBlog = await prisma.blog.findUnique({ where: { id: blogId } });
+
+  if (!existingBlog) {
+    throw new NotFoundError("Blog not found")
+  }
 
   return existingBlog;
 }
 
-async function createBlog(identifier: string, blogData: Blog) {
+async function createBlog(blogData: Blog) {
   const existingAuthor = await prisma.user.findUnique({
-    where: { id: identifier },
+    where: { id: blogData.authorId },
   });
 
   if (!existingAuthor) {
@@ -58,7 +49,7 @@ async function createBlog(identifier: string, blogData: Blog) {
       thumbnail: blogData.thumbnail,
       author: {
         connect: {
-          id: identifier,
+          id: blogData.authorId,
         },
       },
     },
@@ -67,48 +58,33 @@ async function createBlog(identifier: string, blogData: Blog) {
   return newBlogPost;
 }
 
-async function update(identifier: string, blogId: string, blogData: Blog) {
-  const existingAuthor = await prisma.user.findUnique({
-    where: { id: identifier },
-  });
-
-  if (!existingAuthor) {
-    throw new AuthenticationError('User not allowed to perform this operation');
-  }
-
-  const existingBlog = await prisma.blog.findFirst({ where: { id: blogId } });
+async function updateBlog(slug: string, blogData: Blog) {
+  const existingBlog = await prisma.blog.findUnique({ where: { slug: slug }, select: { slug: true} });
 
   if (!existingBlog) {
     throw new NotFoundError('Blog post does not exist');
   }
-
+  
   const updatedBlog: Blog = await prisma.blog.update({
-    where: { authorId: identifier, id: blogId },
+    where: { slug: slug },
     data: {
       ...blogData,
+      slug: blogData.title ? sluggify(blogData.title) : existingBlog.slug,
     },
   });
 
   return updatedBlog;
 }
 
-async function deleteBlog(identifier: string, blogId: string) {
-  const existingAuthor = await prisma.user.findUnique({
-    where: { id: identifier },
-  });
-
-  if (!existingAuthor) {
-    throw new AuthenticationError('User not allowed to perform this operation');
-  }
-
-  const existingBlog = await prisma.blog.findFirst({ where: { id: blogId } });
+async function deleteBlog(identifier: string, slug: string) {
+  const existingBlog = await prisma.blog.findUnique({ where: { slug: slug }, select: { slug: true} });
 
   if (!existingBlog) {
     throw new NotFoundError('Blog post does not exist');
   }
 
   const deletedBlog: Blog = await prisma.blog.delete({
-    where: { authorId: identifier, id: blogId },
+    where: { authorId: identifier, slug: slug },
   });
 
   return deletedBlog;
@@ -130,4 +106,4 @@ async function deleteAllBlog(identifier: string) {
   return deletedBlogs;
 }
 
-export { show, showOne, createBlog, update, deleteBlog, deleteAllBlog };
+export { show, showOne, createBlog, updateBlog, deleteBlog, deleteAllBlog };
